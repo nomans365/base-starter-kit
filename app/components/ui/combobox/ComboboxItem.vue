@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { ComboboxItem, ComboboxItemIndicator, useForwardPropsEmits } from 'reka-ui'
 import type { ComboboxItemEmits, ComboboxItemProps } from 'reka-ui'
-import { CheckIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = defineProps<
@@ -37,7 +36,7 @@ const forwarded = useForwardPropsEmits(delegated, emits)
       data-slot="combobox-item-indicator"
     >
       <ComboboxItemIndicator>
-        <CheckIcon class="size-4" />
+        <IconsLayoutCheckIcon class="size-4" />
       </ComboboxItemIndicator>
     </span>
   </ComboboxItem>

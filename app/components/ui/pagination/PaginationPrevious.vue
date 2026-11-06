@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useAttrs } from 'vue'
 import type { ButtonSize, ButtonVariant } from '@/components/ui/button'
-import { ChevronLeftIcon } from '@/icons/layout'
 import PaginationLink from './PaginationLink.vue'
 
 defineOptions({ inheritAttrs: false })
@@ -31,7 +30,7 @@ const attrs = useAttrs()
     v-bind="attrs"
   >
     <slot>
-      <ChevronLeftIcon data-icon="inline-start" class="rtl:rotate-180" />
+      <IconsLayoutChevronLeftIcon data-icon="inline-start" class="rtl:rotate-180" />
       <span v-if="size !== 'icon'" class="hidden sm:block">{{ text }}</span>
     </slot>
   </PaginationLink>

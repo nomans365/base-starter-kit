@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { ComboboxTrigger, useForwardProps } from 'reka-ui'
 import type { ComboboxTriggerProps } from 'reka-ui'
-import { ChevronDownIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = defineProps<ComboboxTriggerProps & { class?: HTMLAttributes['class'] }>()
@@ -26,7 +25,7 @@ const forwarded = useForwardProps(delegated)
     "
   >
     <slot />
-    <ChevronDownIcon
+    <IconsLayoutChevronDownIcon
       class="pointer-events-none size-4 text-gray-500 transition-transform duration-200 group-hover/combobox-trigger:text-gray-700 group-data-popup-open/combobox-trigger:rotate-180 dark:text-gray-400 dark:group-hover/combobox-trigger:text-gray-300"
     />
   </ComboboxTrigger>

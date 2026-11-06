@@ -3,7 +3,6 @@ import { computed, type HTMLAttributes } from 'vue'
 import { TagsInputItem, TagsInputItemDelete, TagsInputItemText, useForwardProps } from 'reka-ui'
 import type { TagsInputItemProps } from 'reka-ui'
 import { Button } from '@/components/ui/button'
-import { XIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = withDefaults(
@@ -45,7 +44,7 @@ const forwarded = useForwardProps(delegated)
         size="icon-xs"
         class="size-5 rounded-sm p-0 text-gray-400 hover:bg-gray-200/60 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/10 dark:hover:text-gray-200"
       >
-        <XIcon class="pointer-events-none size-3.5" />
+        <IconsLayoutXIcon class="pointer-events-none size-3.5" />
       </Button>
     </TagsInputItemDelete>
   </TagsInputItem>

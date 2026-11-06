@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useAttrs } from 'vue'
-import { HorizontalDotsIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 defineOptions({ inheritAttrs: false })
@@ -21,7 +20,7 @@ const attrs = useAttrs()
     "
   >
     <slot>
-      <HorizontalDotsIcon />
+      <IconsLayoutHorizontalDotsIcon />
     </slot>
     <span class="sr-only">More pages</span>
   </span>

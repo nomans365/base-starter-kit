@@ -3,7 +3,6 @@ import { computed, ref, type HTMLAttributes } from 'vue'
 import { DialogClose, DialogContent, DialogPortal, useForwardPropsEmits } from 'reka-ui'
 import type { DialogContentEmits, DialogContentProps } from 'reka-ui'
 import { Button } from '@/components/ui/button'
-import { XIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 import { focusFirstFieldOnOpen } from '@/utils/focusOnOpen'
 import DialogOverlay from './DialogOverlay.vue'
@@ -64,7 +63,7 @@ const onOpenAutoFocus = (event: Event) => focusFirstFieldOnOpen(event, content.v
           "
           :size="fullScreen ? 'icon-lg' : 'icon-sm'"
         >
-          <XIcon :class="fullScreen ? 'size-6' : undefined" />
+          <IconsLayoutXIcon :class="fullScreen ? 'size-6' : undefined" />
           <span class="sr-only">Close</span>
         </Button>
       </DialogClose>

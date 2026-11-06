@@ -3,7 +3,6 @@ import { computed, type HTMLAttributes } from 'vue'
 import { ComboboxCancel, useForwardProps } from 'reka-ui'
 import type { ComboboxCancelProps } from 'reka-ui'
 import { Button } from '@/components/ui/button'
-import { XIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = defineProps<ComboboxCancelProps & { class?: HTMLAttributes['class'] }>()
@@ -28,7 +27,7 @@ const forwarded = useForwardProps(delegated)
       "
     >
       <slot>
-        <XIcon class="pointer-events-none size-4" />
+        <IconsLayoutXIcon class="pointer-events-none size-4" />
       </slot>
     </Button>
   </ComboboxCancel>

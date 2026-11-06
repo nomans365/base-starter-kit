@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { SelectIcon, SelectTrigger, useForwardProps } from 'reka-ui'
 import type { SelectTriggerProps } from 'reka-ui'
-import { ChevronDownIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = withDefaults(
@@ -36,7 +35,7 @@ const forwarded = useForwardProps(delegated)
   >
     <slot />
     <SelectIcon as-child>
-      <ChevronDownIcon
+      <IconsLayoutChevronDownIcon
         class="size-4 text-gray-500 transition-transform duration-200 group-hover/select-trigger:text-gray-700 group-data-popup-open/select-trigger:rotate-180 dark:text-gray-400 dark:group-hover/select-trigger:text-gray-300"
       />
     </SelectIcon>

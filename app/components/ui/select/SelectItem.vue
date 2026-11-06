@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { SelectItem, SelectItemIndicator, SelectItemText, useForwardPropsEmits } from 'reka-ui'
 import type { SelectItemEmits, SelectItemProps } from 'reka-ui'
-import { CheckIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = defineProps<SelectItemProps & { class?: HTMLAttributes['class']; inset?: boolean }>()
@@ -35,7 +34,7 @@ const forwarded = useForwardPropsEmits(delegated, emits)
       data-slot="select-item-indicator"
     >
       <SelectItemIndicator>
-        <CheckIcon class="size-4" />
+        <IconsLayoutCheckIcon class="size-4" />
       </SelectItemIndicator>
     </span>
   </SelectItem>

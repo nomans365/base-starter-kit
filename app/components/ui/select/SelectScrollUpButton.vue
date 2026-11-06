@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { SelectScrollUpButton, useForwardProps } from 'reka-ui'
 import type { SelectScrollUpButtonProps } from 'reka-ui'
-import { ChevronUpIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = defineProps<SelectScrollUpButtonProps & { class?: HTMLAttributes['class'] }>()
@@ -26,7 +25,7 @@ const forwarded = useForwardProps(delegated)
     "
   >
     <slot>
-      <ChevronUpIcon />
+      <IconsLayoutChevronUpIcon />
     </slot>
   </SelectScrollUpButton>
 </template>
