@@ -1,4 +1,5 @@
-import { GoogleIcon, TwitterXIcon } from '@/icons/layout'
+import GoogleIcon from '~/components/icons/layout/GoogleIcon.vue'
+import TwitterXIcon from '~/components/icons/layout/TwitterXIcon.vue'
 import type { SocialAuthProvider } from './types'
 
 export const socialProviders: SocialAuthProvider[] = [

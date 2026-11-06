@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { Field } from '@/components/ui/field'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '@/components/ui/input-group'
 import { useSidebar } from '@/composables/useSidebar'
-import { HorizontalDotsIcon, MenuTwoIcon, SearchIcon, XIcon } from '@/icons/layout'
 import ThemeToggleButton from '../../header/theme-toggler/ThemeToggler.vue'
 import UserDropdown from '../../header/user-dropdown/UserDropdown.vue'
 import { cn } from '@/utils/cn'
@@ -51,8 +50,8 @@ onBeforeUnmount(() => {
           aria-label="Toggle Sidebar"
           @click="toggleSidebar"
         >
-          <XIcon v-if="openMobile" class="size-6" />
-          <MenuTwoIcon v-else class="size-auto! rtl:-scale-x-100" />
+          <IconsLayoutXIcon v-if="openMobile" class="size-6" />
+          <IconsLayoutMenuTwoIcon v-else class="size-auto! rtl:-scale-x-100" />
         </Button>
 
         <RouterLink to="/" class="xl:hidden">
@@ -73,7 +72,7 @@ onBeforeUnmount(() => {
           class="text-gray-700 xl:hidden dark:text-gray-400"
           @click="toggleApplicationMenu"
         >
-          <HorizontalDotsIcon />
+          <IconsLayoutHorizontalDotsIcon/>
         </Button>
 
         <div class="hidden xl:block">
@@ -83,7 +82,7 @@ onBeforeUnmount(() => {
                 class="border-gray-200 bg-transparent dark:border-gray-800 dark:bg-white/3"
               >
                 <InputGroupAddon align="inline-start">
-                  <SearchIcon class="size-5 text-gray-500 dark:text-gray-400" />
+                  <IconsLayoutSearchIcon class="size-5 text-gray-500 dark:text-gray-400" />
                 </InputGroupAddon>
                 <InputGroupInput
                   ref="inputRef"

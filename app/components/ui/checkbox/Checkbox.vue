@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { CheckboxIndicator, CheckboxRoot } from 'reka-ui'
 import type { CheckboxRootProps } from 'reka-ui'
-import { CheckIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = withDefaults(
@@ -53,7 +52,7 @@ const onUpdate = (value: boolean | 'indeterminate') => {
       data-slot="checkbox-indicator"
       class="grid place-content-center text-current transition-none [&>svg]:size-3"
     >
-      <CheckIcon />
+      <IconsLayoutCheckIcon />
     </CheckboxIndicator>
   </CheckboxRoot>
 </template>

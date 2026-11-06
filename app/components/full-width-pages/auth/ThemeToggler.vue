@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
-import { useTheme } from '@/composables/useTheme'
-import { MoonIcon, SunIcon } from '@/icons/layout'
-
-const { toggleTheme } = useTheme()
+const { toggleTheme } = useTheme();
 </script>
 
 <template>
-  <Button class="size-14 rounded-full" @click="toggleTheme">
-    <MoonIcon class="block dark:hidden" />
-    <SunIcon class="hidden dark:block" />
-  </Button>
+  <UiButton class="size-14 rounded-full" @click="toggleTheme">
+    <IconsLayoutMoonIcon class="block dark:hidden" />
+    <IconsLayoutSunIcon class="hidden dark:block" />
+  </UiButton>
 </template>
