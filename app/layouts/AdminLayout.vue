@@ -24,7 +24,14 @@ const routeSpecificStyles = computed(() =>
   <SidebarProvider :class="cn(isAiRoute && 'h-svh overflow-hidden')">
     <AppSidebar />
 
-    <SidebarInset :class="cn(isAiRoute && 'h-svh overflow-hidden')">
+    <SidebarInset
+      :class="
+        cn(
+          'bg-gray-50 text-gray-900 dark:bg-gray-950 dark:text-gray-100',
+          isAiRoute && 'h-svh overflow-hidden',
+        )
+      "
+    >
       <AppHeader />
 
       <div :class="routeSpecificStyles">
