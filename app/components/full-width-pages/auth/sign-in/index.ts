@@ -1,4 +1,4 @@
 export { default, default as SignIn } from './SignIn.vue'
 export { default as SignInHeader } from './Header.vue'
 export { default as SignInFormFields } from './Form.vue'
-export * from './types'
+export * from './types.ts'

@@ -2,10 +2,10 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { Sidebar, SidebarContent, useSidebar } from '@/components/ui/sidebar'
-import { navItems, othersItems } from './data'
+import { navItems, othersItems } from './data.ts'
 import AppSidebarHeader from './SidebarHeader.vue'
 import SidebarNavGroup from './SidebarNavGroup.vue'
-import type { MenuType, NavItem } from './types'
+import type { MenuType, NavItem } from './types.ts'
 
 const menuSections: { type: MenuType; label: string; items: NavItem[] }[] = [
   { type: 'main', label: 'Menu', items: navItems },

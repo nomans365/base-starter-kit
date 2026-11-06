@@ -3,7 +3,7 @@ import { SidebarGroup, SidebarGroupLabel, SidebarMenu } from '@/components/ui/si
 import { HorizontalDotsIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 import SidebarMenuItem from './SidebarMenuItem.vue'
-import type { MenuType, NavItem } from './types'
+import type { MenuType, NavItem } from './types.ts'
 
 interface SidebarNavGroupProps {
   label: string

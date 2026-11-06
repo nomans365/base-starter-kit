@@ -6,7 +6,7 @@ import { SidebarMenuItem as UiSidebarMenuItem } from '@/components/ui/sidebar'
 import { ChevronDownIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 import SidebarSubmenuItem from './SidebarSubmenuItem.vue'
-import type { NavItem } from './types'
+import type { NavItem } from './types.ts'
 
 interface SidebarMenuItemProps {
   nav: NavItem
