@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu } from '@/components/ui/sidebar'
-import { HorizontalDotsIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 import SidebarMenuItem from './SidebarMenuItem.vue'
 import type { MenuType, NavItem } from './types.ts'
@@ -30,7 +29,7 @@ const emit = defineEmits<{ (e: 'toggleSubmenu', index: number, menuType: MenuTyp
       "
     >
       <template v-if="showContent">{{ label }}</template>
-      <HorizontalDotsIcon v-else />
+      <IconsLayoutHorizontalDotsIcon v-else />
     </SidebarGroupLabel>
     <SidebarMenu class="gap-1">
       <SidebarMenuItem

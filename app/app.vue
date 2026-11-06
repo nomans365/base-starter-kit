@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import SidebarProvider from './layouts/SidebarProvider.vue';
 import ThemeProvider from './layouts/ThemeProvider.vue';
-
+import SidebarProvider from './layouts/SidebarProvider.vue';
 </script>
 
 <template>

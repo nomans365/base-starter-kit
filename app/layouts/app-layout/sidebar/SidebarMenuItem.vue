@@ -3,7 +3,6 @@ import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { SidebarMenuItem as UiSidebarMenuItem } from '@/components/ui/sidebar'
-import { ChevronDownIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 import SidebarSubmenuItem from './SidebarSubmenuItem.vue'
 import type { NavItem } from './types.ts'
@@ -59,7 +58,7 @@ const isPanelOpen = computed(() => props.showContent && props.isOpen)
         >
           new
         </span>
-        <ChevronDownIcon
+        <IconsLayoutChevronDownIcon
           v-if="showContent"
           :class="
             cn(

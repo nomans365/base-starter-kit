@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { DropdownMenuItemIndicator, DropdownMenuRadioItem, useForwardPropsEmits } from 'reka-ui'
 import type { DropdownMenuRadioItemEmits, DropdownMenuRadioItemProps } from 'reka-ui'
-import { CheckIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = defineProps<
@@ -34,7 +33,7 @@ const forwarded = useForwardPropsEmits(delegated, emits)
       data-slot="dropdown-menu-radio-item-indicator"
     >
       <DropdownMenuItemIndicator>
-        <CheckIcon class="size-4" />
+        <IconsLayoutCheckIcon class="size-4" />
       </DropdownMenuItemIndicator>
     </span>
     <slot />

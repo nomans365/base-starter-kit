@@ -13,14 +13,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useRTL } from '@/composables/useRTL'
-import {
-  ChevronDownIcon,
-  GearIcon,
-  GlobeIcon,
-  InfoCircleIcon,
-  LogOutIcon,
-  UserCircleIcon,
-} from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 interface Language {
@@ -70,7 +62,7 @@ const handleSelectLanguage = (id: string) => {
 
       <span class="me-1 block text-sm font-medium">Musharof</span>
 
-      <ChevronDownIcon
+      <IconsLayoutChevronDownIcon
         :class="
           cn(
             'size-5 text-gray-500 duration-200 dark:text-gray-400',
@@ -93,7 +85,7 @@ const handleSelectLanguage = (id: string) => {
       <DropdownMenuSeparator />
 
       <DropdownMenuItem variant="destructive" to="/signin">
-        <LogOutIcon />
+        <IconsLayoutLogOutIcon />
         Sign out
       </DropdownMenuItem>
     </DropdownMenuContent>

@@ -1,14 +1,4 @@
-import {
-  BoxIcon,
-  CalendarIcon,
-  LayoutGridIcon,
-  ListIcon,
-  PageIcon,
-  PieChartIcon,
-  PluginIcon,
-  TableIcon,
-  UserCircleIcon,
-} from '@/icons/layout'
+import LayoutGridIcon from '~/components/icons/layout/LayoutGridIcon.vue'
 import type { NavItem } from './types'
 
 export const navItems: NavItem[] = [

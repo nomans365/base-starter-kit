@@ -2,7 +2,6 @@
 import { computed, type HTMLAttributes } from 'vue'
 import { DropdownMenuSubTrigger, useForwardProps } from 'reka-ui'
 import type { DropdownMenuSubTriggerProps } from 'reka-ui'
-import { ChevronRightIcon } from '@/icons/layout'
 import { cn } from '@/utils/cn'
 
 const props = withDefaults(
@@ -38,7 +37,7 @@ const forwarded = useForwardProps(delegated)
     "
   >
     <slot />
-    <ChevronRightIcon
+    <IconsLayoutChevronRightIcon
       v-if="showIcon"
       class="ms-auto size-4 text-gray-500 rtl:rotate-180 dark:text-gray-400"
     />
