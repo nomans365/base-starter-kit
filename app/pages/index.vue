@@ -1,11 +1,10 @@
 <script setup lang="ts">
+
 definePageMeta({
-  layout: 'admin-layout'
+  layout: 'admin-layout',
 })
 </script>
 
 <template>
-    <div>
-        
-    </div>
+  <DashboardOverview />
 </template>
