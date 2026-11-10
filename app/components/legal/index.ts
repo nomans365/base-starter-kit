@@ -1,0 +1,5 @@
+export { default as LegalDocumentPreview } from './LegalDocumentPreview.vue'
+export { default as DocumentSectionNav } from './DocumentSectionNav.vue'
+export { default as PrivacyPolicyEditor } from './PrivacyPolicyEditor.vue'
+export { default as RichParagraphEditor } from './RichParagraphEditor.vue'
+export { default as TermsConditionsEditor } from './TermsConditionsEditor.vue'
