@@ -10,7 +10,7 @@ export const navItems: NavItem[] = [
   },
   {
     icon: GlobeIcon,
-    name: 'Countries',
+    name: 'Country Management',
     path: '/countries',
   },
 ]
