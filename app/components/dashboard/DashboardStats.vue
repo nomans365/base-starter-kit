@@ -12,7 +12,7 @@ defineProps<{
 
 <template>
   <section
-    class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3"
+    class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 dark:bg-white/3"
     aria-label="Dashboard statistics"
   >
     <StatCard
