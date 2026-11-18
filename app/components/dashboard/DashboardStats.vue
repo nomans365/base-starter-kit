@@ -1,13 +1,12 @@
-<script setup lang="ts">
+<script setup>
 import ArchiveIcon from '~/components/icons/layout/ArchiveIcon.vue'
 import GlobeIcon from '~/components/icons/layout/GlobeIcon.vue'
 import PageIcon from '~/components/icons/layout/PageIcon.vue'
 import StatCard from '~/components/dashboard/stats/StatCard.vue'
-import type { DashboardStats as DashboardStatsData } from '~/types/dashboard'
 
-defineProps<{
-  stats: DashboardStatsData
-}>()
+defineProps({
+  stats: { type: Object, required: true },
+})
 </script>
 
 <template>

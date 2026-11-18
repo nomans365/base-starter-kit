@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import DashboardStats from '~/components/dashboard/DashboardStats.vue'
 import { getDashboardStatistics } from '~/services/dashboard/dashboardService'
 

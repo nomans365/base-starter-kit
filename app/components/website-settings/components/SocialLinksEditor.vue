@@ -1,10 +1,9 @@
-<script setup lang="ts">
+<script setup>
 import GlobeIcon from "~/components/icons/layout/GlobeIcon.vue";
-import type { SocialMediaLink } from "~/types/websiteSettings";
 
-const model = defineModel<SocialMediaLink[]>({ required: true });
-const props = withDefaults(defineProps<{ disabled?: boolean }>(), {
-  disabled: false,
+const model = defineModel({ type: Array, required: true });
+const props = defineProps({
+  disabled: { type: Boolean, default: false },
 });
 
 const socialPlatforms = [
@@ -14,15 +13,11 @@ const socialPlatforms = [
   "LinkedIn",
   "YouTube",
   "TikTok",
-] as const;
+];
 
 let nextId = 0;
 
-function updateLink(
-  index: number,
-  field: "platform" | "url",
-  value: string | number,
-) {
+function updateLink(index, field, value) {
   model.value = model.value.map((link, linkIndex) =>
       linkIndex === index ? { ...link, [field]: String(value) } : link,
   );

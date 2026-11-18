@@ -1,34 +1,23 @@
-<script setup lang="ts">
+<script setup>
 import { computed } from "vue";
-import type {
-  FooterSettings,
-  SettingsFeedback,
-  SocialMediaLink,
-} from "~/types/websiteSettings";
 import LogoUpload from "./components/LogoUpload.vue";
 import SocialLinksEditor from "./components/SocialLinksEditor.vue";
 
-const props = defineProps<{
-  settings: FooterSettings;
-  saving: boolean;
-  feedback: SettingsFeedback | null;
-}>();
+const props = defineProps({
+  settings: { type: Object, required: true },
+  saving: { type: Boolean, required: true },
+  feedback: { type: Object, required: true },
+});
 
-const emit = defineEmits<{
-  (event: "update:settings", value: FooterSettings): void;
-  (event: "save"): void;
-}>();
+const emit = defineEmits(["update:settings", "save"]);
 
-function updateField<K extends keyof FooterSettings>(
-  field: K,
-  value: FooterSettings[K],
-) {
+function updateField(field, value) {
   emit("update:settings", { ...props.settings, [field]: value });
 }
 
 const socialLinks = computed({
   get: () => props.settings.socialLinks,
-  set: (value: SocialMediaLink[]) => updateField("socialLinks", value),
+  set: (value) => updateField("socialLinks", value),
 });
 </script>
 

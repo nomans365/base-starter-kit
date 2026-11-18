@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import HeaderOptions from "~/components/website-settings/HeaderOptions.vue";
 import FooterOptions from "~/components/website-settings/FooterOptions.vue";
 import {
@@ -6,19 +6,12 @@ import {
   updateFooterSettings,
   updateHeaderSettings,
 } from "~/services/website-settings/websiteSettingsService";
-import type {
-  FooterSettings,
-  HeaderSettings,
-  SettingsFeedback,
-  WebsiteSettings,
-} from "~/types/websiteSettings";
-
 const {
   data: settings,
   pending,
   error: loadError,
   refresh,
-} = await useAsyncData<WebsiteSettings>(
+} = await useAsyncData(
   "website-settings",
   getWebsiteSettings,
   { server: false },
@@ -29,21 +22,21 @@ const isSavingFooter = ref(false);
 const headerFeedback = ref<SettingsFeedback | null>(null);
 const footerFeedback = ref<SettingsFeedback | null>(null);
 
-function updateHeader(value: HeaderSettings) {
+function updateHeader(value) {
   if (settings.value) {
     settings.value = { ...settings.value, header: value };
   }
   headerFeedback.value = null;
 }
 
-function updateFooter(value: FooterSettings) {
+function updateFooter(value) {
   if (settings.value) {
     settings.value = { ...settings.value, footer: value };
   }
   footerFeedback.value = null;
 }
 
-function isHttpUrl(value: string): boolean {
+function isHttpUrl(value) {
   try {
     const url = new URL(value);
     return url.protocol === "http:" || url.protocol === "https:";
@@ -52,7 +45,7 @@ function isHttpUrl(value: string): boolean {
   }
 }
 
-function validateHeader(header: HeaderSettings): string | null {
+function validateHeader(header) {
   const appLink = header.getAppLink.trim();
   if (appLink && !isHttpUrl(appLink)) {
     return "Enter a valid HTTP or HTTPS URL for the Get App Link.";
@@ -61,7 +54,7 @@ function validateHeader(header: HeaderSettings): string | null {
   return null;
 }
 
-function validateFooter(footer: FooterSettings): string | null {
+function validateFooter(footer) {
   for (const [index, link] of footer.socialLinks.entries()) {
     if (!link.platform.trim()) {
       return `Enter a platform name for social link ${index + 1}.`;
@@ -74,7 +67,7 @@ function validateFooter(footer: FooterSettings): string | null {
   return null;
 }
 
-function errorMessage(error: unknown, fallback: string): string {
+function errorMessage(error, fallback) {
   return error instanceof Error ? error.message : fallback;
 }
 

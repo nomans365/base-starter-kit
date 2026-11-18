@@ -1,19 +1,14 @@
-<script setup lang="ts">
+<script setup>
 import { onBeforeUnmount, shallowRef } from "vue";
 
-const props = withDefaults(
-  defineProps<{
-    id: string;
-    label: string;
-    modelValue: string | null;
-    disabled?: boolean;
-  }>(),
-  { disabled: false },
-);
+const props = defineProps({
+  id: { type: String, required: true },
+  label: { type: String, required: true },
+  modelValue: { type: [String, null], required: true },
+  disabled: { type: Boolean, default: false },
+});
 
-const emit = defineEmits<{
-  (event: "update:modelValue", value: string | null): void;
-}>();
+const emit = defineEmits(["update:modelValue"]);
 
 const maxFileSize = 512 * 1024;
 const allowedTypes = [
@@ -25,7 +20,7 @@ const allowedTypes = [
 ];
 const isReading = ref(false);
 const errorMessage = ref("");
-const selectedFile = shallowRef<File | null>(null);
+const selectedFile = shallowRef(null);
 const previewObjectUrl = ref<string | null>(null);
 
 function revokePreviewObjectUrl() {
@@ -35,7 +30,7 @@ function revokePreviewObjectUrl() {
   }
 }
 
-function readFileAsDataUrl(file: File): Promise<string> {
+function readFileAsDataUrl(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
@@ -59,8 +54,8 @@ function readFileAsDataUrl(file: File): Promise<string> {
   });
 }
 
-async function handleFileChange(event: Event) {
-  const input = event.target as HTMLInputElement;
+async function handleFileChange(event) {
+  const input = event.target;
   const file = input.files?.[0];
   errorMessage.value = "";
 

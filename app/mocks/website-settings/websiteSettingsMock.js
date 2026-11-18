@@ -1,6 +1,4 @@
-import type { WebsiteSettings } from "~/types/websiteSettings";
-
-export const websiteSettingsMock: WebsiteSettings = {
+export const websiteSettingsMock = {
   header: {
     websiteLogo: "/images/logo/logo.svg",
     mobileLogo: "/images/logo/rozeremit_logo.svg",

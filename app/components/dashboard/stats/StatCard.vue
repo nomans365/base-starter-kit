@@ -1,10 +1,10 @@
-<script setup lang="ts">
+<script setup>
 
-defineProps<{
-  title: string
-  value: number
-  icon: Component
-}>()
+defineProps({
+  title: { type: String, required: true },
+  value: { type: Number, required: true },
+  icon: { type: [Object, Function], required: true },
+})
 </script>
 
 <template>

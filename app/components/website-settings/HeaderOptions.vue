@@ -1,22 +1,15 @@
-<script setup lang="ts">
-import type { HeaderSettings, SettingsFeedback } from "~/types/websiteSettings";
+<script setup>
 import LogoUpload from "./components/LogoUpload.vue";
 
-const props = defineProps<{
-  settings: HeaderSettings;
-  saving: boolean;
-  feedback: SettingsFeedback | null;
-}>();
+const props = defineProps({
+  settings: { type: Object, required: true },
+  saving: { type: Boolean, required: true },
+  feedback: { type: Object, required: true },
+});
 
-const emit = defineEmits<{
-  (event: "update:settings", value: HeaderSettings): void;
-  (event: "save"): void;
-}>();
+const emit = defineEmits(["update:settings", "save"]);
 
-function updateField<K extends keyof HeaderSettings>(
-  field: K,
-  value: HeaderSettings[K],
-) {
+function updateField(field, value) {
   emit("update:settings", { ...props.settings, [field]: value });
 }
 </script>
