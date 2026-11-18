@@ -7,6 +7,15 @@ const props = withDefaults(defineProps<{ disabled?: boolean }>(), {
   disabled: false,
 });
 
+const socialPlatforms = [
+  "Facebook",
+  "Instagram",
+  "X",
+  "LinkedIn",
+  "YouTube",
+  "TikTok",
+] as const;
+
 let nextId = 0;
 
 function updateLink(
@@ -49,7 +58,7 @@ function removeLink(index: number) {
           Social Media Links
         </h3>
         <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Add a platform name and its public URL.
+          Add a social platform and its public URL.
         </p>
       </div>
       <UiButton
@@ -72,13 +81,24 @@ function removeLink(index: number) {
         <UiFieldLabel :for="`social-platform-${link.id}`"
           >Platform</UiFieldLabel
         >
-        <UiInput
-          :id="`social-platform-${link.id}`"
+        <UiSelect
           :model-value="link.platform"
-          placeholder="e.g. Instagram"
           :disabled="props.disabled"
           @update:model-value="updateLink(index, 'platform', $event)"
-        />
+        >
+          <UiSelectTrigger :id="`social-platform-${link.id}`">
+            <UiSelectValue placeholder="Choose a platform" />
+          </UiSelectTrigger>
+          <UiSelectContent>
+            <UiSelectItem
+              v-for="platform in socialPlatforms"
+              :key="platform"
+              :value="platform"
+            >
+              {{ platform }}
+            </UiSelectItem>
+          </UiSelectContent>
+        </UiSelect>
       </UiField>
 
       <UiField>
