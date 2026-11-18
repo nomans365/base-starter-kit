@@ -22,6 +22,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { FileInput } from '@/components/ui/file-input'
 import { Input } from '@/components/ui/input'
+import { Switch } from '@/components/ui/switch'
 import { Table, TableBody, TableCell, TableHeader, TableRow } from '@/components/ui/table'
 import HorizontalDotsIcon from '@/components/icons/layout/HorizontalDotsIcon.vue'
 import { createCountry, getCountries, updateCountry, updateCountryStatus } from '@/services/manage-countries/countryService'
@@ -39,7 +40,14 @@ const selectedFile = ref<File | null>(null)
 const previewUrl = ref('')
 const slugManuallyEdited = ref(false)
 const editingCountry = computed(() => countries.value.find((country) => country.id === editingId.value))
-const form = reactive<CountryInput>({ name: '', slug: '', code: '', isActive: true, logoFile: null })
+const form = reactive<CountryInput>({
+  name: '',
+  slug: '',
+  code: '',
+  isActive: true,
+  isReceivingCountry: false,
+  logoFile: null,
+})
 const filteredCountries = computed(() => {
   const value = query.value.trim().toLowerCase()
   return value
@@ -69,7 +77,7 @@ function resetForm(): void {
   editingId.value = null
   selectedFile.value = null
   formError.value = ''
-  Object.assign(form, { name: '', slug: '', code: '', isActive: true, logoFile: null })
+  Object.assign(form, { name: '', slug: '', code: '', isActive: true, isReceivingCountry: false, logoFile: null })
   slugManuallyEdited.value = false
 }
 
@@ -86,6 +94,7 @@ function openEdit(country: Country): void {
     slug: country.slug,
     code: country.code,
     isActive: country.isActive,
+    isReceivingCountry: country.isReceivingCountry,
     logoFile: null,
   })
   slugManuallyEdited.value = true
@@ -221,6 +230,18 @@ onUnmounted(clearPreview)
               <span>Active</span>
             </label>
           </div>
+          <div class="flex items-center justify-between gap-4 rounded-lg border border-gray-200 p-4 md:col-span-2 dark:border-gray-700">
+            <div>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">Receiving Country / Corridor</p>
+              <p class="mt-1 text-xs font-normal text-gray-500 dark:text-gray-400">
+                Enable this option if this country is a destination country with its own corridor-specific FAQs.
+              </p>
+            </div>
+            <Switch
+              v-model="form.isReceivingCountry"
+              aria-label="Receiving Country / Corridor"
+            />
+          </div>
           <p v-if="formError" role="alert" class="text-sm text-red-600 md:col-span-2">{{ formError }}</p>
           <DialogFooter class="md:col-span-2">
             <Button type="button" variant="outline" @click="closeForm">Cancel</Button>
@@ -243,6 +264,7 @@ onUnmounted(clearPreview)
                 <TableCell is-header class="px-4 py-3">Country</TableCell>
                 <TableCell is-header class="px-4 py-3">Code</TableCell>
                 <TableCell is-header class="px-4 py-3">Status</TableCell>
+                <TableCell is-header class="px-4 py-3">Receiving Country</TableCell>
                 <TableCell is-header class="px-4 py-3">Actions</TableCell>
               </TableRow>
             </TableHeader>
@@ -276,6 +298,11 @@ onUnmounted(clearPreview)
                   </Badge>
                 </TableCell>
                 <TableCell class="px-4 py-4">
+                  <Badge :color="country.isReceivingCountry ? 'info' : 'gray'">
+                    {{ country.isReceivingCountry ? 'Receiving Country' : 'Not a Receiving Country' }}
+                  </Badge>
+                </TableCell>
+                <TableCell class="px-4 py-4">
                   <DropdownMenu>
                     <DropdownMenuTrigger as-child>
                       <Button variant="ghost" size="icon-sm" :aria-label="`Actions for ${country.name}`">
@@ -295,6 +322,12 @@ onUnmounted(clearPreview)
                       </DropdownMenuItem>
                       <DropdownMenuItem :to="`/countries/${country.id}/privacy-policy`">
                         Privacy Policy
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        v-if="country.isReceivingCountry"
+                        :to="`/countries/${country.id}/faqs`"
+                      >
+                        Manage Corridor FAQs
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>

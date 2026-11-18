@@ -5,7 +5,20 @@ import { readMockCollection, writeMockCollection } from './mockStorage'
 const STORAGE_KEY = 'roze-cms-countries-v1'
 
 function countries(): Country[] {
-  return readMockCollection(STORAGE_KEY, mockCountries)
+  const saved = readMockCollection(STORAGE_KEY, mockCountries).map((country) => ({
+    ...country,
+    isReceivingCountry: country.isReceivingCountry === true,
+  }))
+  for (const seed of mockCountries) {
+    const alreadyPresent = saved.some((country) =>
+      country.id === seed.id ||
+      country.slug.toLowerCase() === seed.slug.toLowerCase() ||
+      country.code.toLowerCase() === seed.code.toLowerCase() ||
+      country.name.trim().toLowerCase() === seed.name.toLowerCase(),
+    )
+    if (!alreadyPresent) saved.push({ ...seed })
+  }
+  return saved
 }
 
 function validateCountry(input: CountryInput, all: Country[], currentId?: string): void {
@@ -39,6 +52,7 @@ function validateCountry(input: CountryInput, all: Country[], currentId?: string
     }
   }
   if (typeof input.isActive !== 'boolean') throw new Error('Choose a valid country status.')
+  if (typeof input.isReceivingCountry !== 'boolean') throw new Error('Choose a valid receiving-country status.')
 }
 
 function logoReference(file?: File | null, existing = ''): string {
@@ -72,6 +86,7 @@ export async function createCountry(input: CountryInput): Promise<Country> {
     code: input.code.trim().toUpperCase(),
     logoUrl: logoReference(input.logoFile, '/images/countries/default.svg'),
     isActive: input.isActive,
+    isReceivingCountry: input.isReceivingCountry,
     createdAt: now,
     updatedAt: now,
   }
@@ -93,6 +108,7 @@ export async function updateCountry(id: string, input: CountryInput): Promise<Co
     code: input.code.trim().toUpperCase(),
     logoUrl: logoReference(input.logoFile, old.logoUrl),
     isActive: input.isActive,
+    isReceivingCountry: input.isReceivingCountry,
     updatedAt: new Date().toISOString(),
   }
   all[index] = updated

@@ -5,6 +5,7 @@ export interface Country {
   code: string
   logoUrl: string
   isActive: boolean
+  isReceivingCountry: boolean
   createdAt: string
   updatedAt: string
 }
@@ -14,5 +15,6 @@ export interface CountryInput {
   slug: string
   code: string
   isActive: boolean
+  isReceivingCountry: boolean
   logoFile?: File | null
 }
