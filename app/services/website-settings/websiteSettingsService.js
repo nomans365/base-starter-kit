@@ -1,14 +1,8 @@
 import { websiteSettingsMock } from "~/mocks/website-settings/websiteSettingsMock";
-import type {
-  FooterSettings,
-  HeaderSettings,
-  SocialMediaLink,
-  WebsiteSettings,
-} from "~/types/websiteSettings";
 
 const storageKey = "roze-cms-website-settings";
 
-function cloneSettings(settings: WebsiteSettings): WebsiteSettings {
+function cloneSettings(settings) {
   return {
     header: { ...settings.header },
     footer: {
@@ -18,15 +12,15 @@ function cloneSettings(settings: WebsiteSettings): WebsiteSettings {
   };
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
+function isRecord(value) {
   return typeof value === "object" && value !== null;
 }
 
-function isNullableString(value: unknown): value is string | null {
+function isNullableString(value) {
   return value === null || typeof value === "string";
 }
 
-function isSocialMediaLink(value: unknown): value is SocialMediaLink {
+function isSocialMediaLink(value) {
   if (!isRecord(value)) return false;
 
   return (
@@ -36,7 +30,7 @@ function isSocialMediaLink(value: unknown): value is SocialMediaLink {
   );
 }
 
-function isWebsiteSettings(value: unknown): value is WebsiteSettings {
+function isWebsiteSettings(value) {
   if (!isRecord(value) || !isRecord(value.header) || !isRecord(value.footer)) {
     return false;
   }
@@ -53,13 +47,13 @@ function isWebsiteSettings(value: unknown): value is WebsiteSettings {
   );
 }
 
-function readSettings(): WebsiteSettings {
+function readSettings() {
   if (typeof window === "undefined") return cloneSettings(websiteSettingsMock);
 
   const savedSettings = window.localStorage.getItem(storageKey);
   if (!savedSettings) return cloneSettings(websiteSettingsMock);
 
-  let parsedSettings: unknown;
+  let parsedSettings;
   try {
     parsedSettings = JSON.parse(savedSettings);
   } catch {
@@ -77,7 +71,7 @@ function readSettings(): WebsiteSettings {
   return cloneSettings(parsedSettings);
 }
 
-function saveSettings(settings: WebsiteSettings): WebsiteSettings {
+function saveSettings(settings) {
   if (typeof window === "undefined") {
     throw new Error(
       "Mock website settings can only be updated in the browser.",
@@ -88,18 +82,16 @@ function saveSettings(settings: WebsiteSettings): WebsiteSettings {
   return cloneSettings(settings);
 }
 
-function simulateRequest(): Promise<void> {
+function simulateRequest() {
   return new Promise((resolve) => setTimeout(resolve, 300));
 }
 
-export async function getWebsiteSettings(): Promise<WebsiteSettings> {
+export async function getWebsiteSettings() {
   await simulateRequest();
   return readSettings();
 }
 
-export async function updateHeaderSettings(
-  header: HeaderSettings,
-): Promise<HeaderSettings> {
+export async function updateHeaderSettings(header) {
   await simulateRequest();
 
   const settings = readSettings();
@@ -111,9 +103,7 @@ export async function updateHeaderSettings(
   return updatedSettings.header;
 }
 
-export async function updateFooterSettings(
-  footer: FooterSettings,
-): Promise<FooterSettings> {
+export async function updateFooterSettings(footer) {
   await simulateRequest();
 
   const settings = readSettings();
