@@ -257,87 +257,125 @@ onUnmounted(clearPreview)
         <Input v-model="query" class="max-w-sm" placeholder="Search countries..." aria-label="Search countries" />
       </CardHeader>
       <CardContent>
-        <div class="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow class="border-b border-gray-200 text-left text-xs uppercase text-gray-500 dark:border-gray-700">
-                <TableCell is-header class="px-4 py-3">Country</TableCell>
-                <TableCell is-header class="px-4 py-3">Code</TableCell>
-                <TableCell is-header class="px-4 py-3">Status</TableCell>
-                <TableCell is-header class="px-4 py-3">Receiving Country</TableCell>
-                <TableCell is-header class="px-4 py-3">Actions</TableCell>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow
-                v-for="country in filteredCountries"
-                :key="country.id"
-                class="border-b border-gray-100 text-sm dark:border-gray-800"
-              >
-                <TableCell class="px-4 py-4">
-                  <div class="flex items-center gap-3">
-                    <img
-                      v-if="logoFor(country)"
-                      :src="logoFor(country)"
-                      class="size-10 rounded-lg border border-gray-200 object-cover dark:border-gray-700"
-                      :alt="`${country.name} logo`"
-                    />
-                    <span v-else class="flex size-10 items-center justify-center rounded-lg bg-gray-100 text-xs font-semibold dark:bg-gray-800">
-                      {{ country.code }}
-                    </span>
-                    <div>
-                      <p class="font-medium text-gray-900 dark:text-white">{{ country.name }}</p>
-                      <p class="text-xs text-gray-500">/{{ country.slug }}</p>
-                    </div>
-                  </div>
-                </TableCell>
-                <TableCell class="px-4 py-4 font-medium">{{ country.code }}</TableCell>
-                <TableCell class="px-4 py-4">
-                  <Badge :color="country.isActive ? 'success' : 'gray'">
-                    {{ country.isActive ? 'Active' : 'Inactive' }}
-                  </Badge>
-                </TableCell>
-                <TableCell class="px-4 py-4">
-                  <Badge :color="country.isReceivingCountry ? 'info' : 'gray'">
-                    {{ country.isReceivingCountry ? 'Receiving Country' : 'Not a Receiving Country' }}
-                  </Badge>
-                </TableCell>
-                <TableCell class="px-4 py-4">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger as-child>
-                      <Button variant="ghost" size="icon-sm" :aria-label="`Actions for ${country.name}`">
-                        <HorizontalDotsIcon />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuLabel>{{ country.name }}</DropdownMenuLabel>
-                      <DropdownMenuItem @select="openEdit(country)">Edit country</DropdownMenuItem>
-                      <DropdownMenuItem @select="toggleStatus(country)">
-                        {{ country.isActive ? 'Deactivate country' : 'Activate country' }}
-                      </DropdownMenuItem>
-                      <DropdownMenuSeparator />
-                      <DropdownMenuLabel>Legal documents</DropdownMenuLabel>
-                      <DropdownMenuItem :to="`/countries/${country.id}/terms-and-conditions`">
-                        Terms &amp; Conditions
-                      </DropdownMenuItem>
-                      <DropdownMenuItem :to="`/countries/${country.id}/privacy-policy`">
-                        Privacy Policy
-                      </DropdownMenuItem>
-                      <DropdownMenuItem
-                        v-if="country.isReceivingCountry"
-                        :to="`/countries/${country.id}/faqs`"
+        <div
+          class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/5 dark:bg-white/3"
+        >
+          <div class="max-w-full overflow-x-auto">
+            <Table>
+              <TableHeader class="border-b border-gray-100 dark:border-white/5">
+                <TableRow>
+                  <TableCell
+                    is-header
+                    class="px-5 py-3 text-start text-xs font-medium text-gray-500 sm:px-6 dark:text-gray-400"
+                  >
+                    Country
+                  </TableCell>
+                  <TableCell
+                    is-header
+                    class="px-5 py-3 text-start text-xs font-medium text-gray-500 sm:px-6 dark:text-gray-400"
+                  >
+                    Code
+                  </TableCell>
+                  <TableCell
+                    is-header
+                    class="px-5 py-3 text-start text-xs font-medium text-gray-500 sm:px-6 dark:text-gray-400"
+                  >
+                    Status
+                  </TableCell>
+                  <TableCell
+                    is-header
+                    class="px-5 py-3 text-start text-xs font-medium text-gray-500 sm:px-6 dark:text-gray-400"
+                  >
+                    Receiving Country
+                  </TableCell>
+                  <TableCell
+                    is-header
+                    class="px-5 py-3 text-start text-xs font-medium text-gray-500 sm:px-6 dark:text-gray-400"
+                  >
+                    Actions
+                  </TableCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody class="divide-y divide-gray-100 dark:divide-white/5">
+                <TableRow
+                  v-for="country in filteredCountries"
+                  :key="country.id"
+                  class="transition hover:bg-gray-50/50 dark:hover:bg-white/2"
+                >
+                  <TableCell class="px-5 py-4 text-start sm:px-6">
+                    <div class="flex items-center gap-3">
+                      <img
+                        v-if="logoFor(country)"
+                        :src="logoFor(country)"
+                        class="size-10 rounded-lg border border-gray-200 object-cover dark:border-gray-700"
+                        :alt="`${country.name} logo`"
+                      />
+                      <span
+                        v-else
+                        class="flex size-10 items-center justify-center rounded-lg bg-gray-100 text-xs font-semibold dark:bg-gray-800"
                       >
-                        Manage Corridor FAQs
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
-              </TableRow>
-              <TableRow v-if="filteredCountries.length === 0">
-                <TableCell class="px-4 py-8 text-center text-gray-500">No countries match your search.</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
+                        {{ country.code }}
+                      </span>
+                      <div>
+                        <p class="text-sm font-medium text-gray-800 dark:text-white/90">
+                          {{ country.name }}
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">/{{ country.slug }}</p>
+                      </div>
+                    </div>
+                  </TableCell>
+                  <TableCell class="px-5 py-4 text-start text-sm text-gray-500 sm:px-6 dark:text-gray-400">
+                    {{ country.code }}
+                  </TableCell>
+                  <TableCell class="px-5 py-4 text-start sm:px-6">
+                    <Badge :color="country.isActive ? 'success' : 'gray'">
+                      {{ country.isActive ? 'Active' : 'Inactive' }}
+                    </Badge>
+                  </TableCell>
+                  <TableCell class="px-5 py-4 text-start sm:px-6">
+                    <Badge :color="country.isReceivingCountry ? 'info' : 'gray'">
+                      {{ country.isReceivingCountry ? 'Receiving Country' : 'Not a Receiving Country' }}
+                    </Badge>
+                  </TableCell>
+                  <TableCell class="px-5 py-4 text-start sm:px-6">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger as-child>
+                        <Button variant="ghost" size="icon-sm" :aria-label="`Actions for ${country.name}`">
+                          <HorizontalDotsIcon />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>{{ country.name }}</DropdownMenuLabel>
+                        <DropdownMenuItem @select="openEdit(country)">Edit country</DropdownMenuItem>
+                        <DropdownMenuItem @select="toggleStatus(country)">
+                          {{ country.isActive ? 'Deactivate country' : 'Activate country' }}
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuLabel>Legal documents</DropdownMenuLabel>
+                        <DropdownMenuItem :to="`/countries/${country.id}/terms-and-conditions`">
+                          Terms &amp; Conditions
+                        </DropdownMenuItem>
+                        <DropdownMenuItem :to="`/countries/${country.id}/privacy-policy`">
+                          Privacy Policy
+                        </DropdownMenuItem>
+                        <DropdownMenuItem
+                          v-if="country.isReceivingCountry"
+                          :to="`/countries/${country.id}/faqs`"
+                        >
+                          Manage Corridor FAQs
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+                <TableRow v-if="filteredCountries.length === 0">
+                  <TableCell colspan="5" class="px-5 py-8 text-center text-sm text-gray-500 sm:px-6 dark:text-gray-400">
+                    No countries match your search.
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </CardContent>
     </Card>
